@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_06_044531) do
+ActiveRecord::Schema.define(version: 2022_06_06_221531) do
 
   create_table "item_stocks", force: :cascade do |t|
     t.integer "producto_id"
@@ -40,8 +40,12 @@ ActiveRecord::Schema.define(version: 2022_06_06_044531) do
     t.datetime "fecha"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "producto_id", null: false
+    t.integer "cantidad", null: false
+    t.index ["cantidad"], name: "index_operacions_on_cantidad"
     t.index ["destino_id"], name: "index_operacions_on_destino_id"
     t.index ["origen_id"], name: "index_operacions_on_origen_id"
+    t.index ["producto_id"], name: "index_operacions_on_producto_id"
     t.index ["usuario_id"], name: "index_operacions_on_usuario_id"
   end
 
@@ -66,5 +70,6 @@ ActiveRecord::Schema.define(version: 2022_06_06_044531) do
   add_foreign_key "item_stocks", "productos"
   add_foreign_key "operacions", "locals", column: "destino_id"
   add_foreign_key "operacions", "locals", column: "origen_id"
+  add_foreign_key "operacions", "productos"
   add_foreign_key "operacions", "usuarios"
 end

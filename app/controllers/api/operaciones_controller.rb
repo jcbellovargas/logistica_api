@@ -2,13 +2,23 @@ class Api::OperacionesController < ApplicationController
   include Interactor
 
   def index
-    @operaciones = Operacion.all
-    render json: @operaciones
+    render json: Operacion.all
   end
 
   def create
     result = TransferirStock.call(params)
 
-    render json: result
+    if result.success?
+      Operacion.create(
+        origen: result.origen,
+        destino: result.destino,
+        usuario: result.usuario,
+        producto: result.producto,
+        fecha: result.fecha
+      )
+      render json: { status: "OK", mensaje: "Transferencia realizada con exito" }
+    else
+      render json: { status: "ERROR", mensaje: result.mensaje }
+    end
   end
 end

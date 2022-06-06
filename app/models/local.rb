@@ -1,4 +1,5 @@
 class Local < ApplicationRecord
+  require "pry"
   has_many :stock, class_name: "ItemStock"
   has_many :productos, through: :stock
 
@@ -22,7 +23,7 @@ class Local < ApplicationRecord
       item_stock.cantidad -= cantidad
       item_stock.save!
       if item_stock.cantidad <= 0
-        # stock.delete(item_stock)
+        stock.delete(item_stock)
         item_stock.delete
       end
     end

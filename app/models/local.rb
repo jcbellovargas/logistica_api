@@ -3,6 +3,9 @@ class Local < ApplicationRecord
   has_many :stock, class_name: "ItemStock"
   has_many :productos, through: :stock
 
+  TIENDA = 'TIENDA'.freeze
+  DEPOSITO = 'DEPOSITO'.freeze
+
   def tiene_stock?(producto, cantidad)
     stock.any? { |item| item.producto.nombre == producto.nombre && item.cantidad >= cantidad}
   end

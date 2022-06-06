@@ -6,16 +6,10 @@ class Api::OperacionesController < ApplicationController
   end
 
   def create
-    result = TransferirStock.call(params)
+    params[:usuario_id] = params[:usuario_id] || Usuario.first.id
+    result = Transfer.call(params)
 
     if result.success?
-      Operacion.create(
-        origen: result.origen,
-        destino: result.destino,
-        usuario: result.usuario,
-        producto: result.producto,
-        fecha: result.fecha
-      )
       render json: { status: "OK", mensaje: "Transferencia realizada con exito" }
     else
       render json: { status: "ERROR", mensaje: result.mensaje }

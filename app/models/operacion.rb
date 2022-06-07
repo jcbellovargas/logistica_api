@@ -12,7 +12,7 @@ class Operacion < ApplicationRecord
         producto: { only: [:id, :nombre, :modelo] }, 
         usuario: { only:[:id, :nombre] }
       ],
-      only: [:id, :origen, :destino, :producto, :usuario, :cantidad]
+      only: [:id, :origen, :destino, :producto, :usuario, :cantidad, :fecha]
     )
   end
 end

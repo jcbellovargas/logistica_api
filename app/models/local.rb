@@ -32,4 +32,8 @@ class Local < ApplicationRecord
     end
   end
 
+  def as_json
+    super({ only: [:id, :nombre, :localidad, :provincia, :tipo_local] })
+  end
+
 end

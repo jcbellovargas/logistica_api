@@ -41,3 +41,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "interactor", "~> 3.0"
 gem "pry"
+gem "rack-cors"

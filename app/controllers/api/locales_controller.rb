@@ -2,7 +2,7 @@ class Api::LocalesController < ApplicationController
   include Interactor
 
   def index
-    render json: Local.all
+    render json: Local.all.as_json
   end
 
   def create
@@ -13,5 +13,13 @@ class Api::LocalesController < ApplicationController
       tipo_local: params[:tipo_local]
     )
     render json: @local
+  end
+
+  def tiendas
+    render json: Local.where(tipo_local: Local::TIENDA).as_json
+  end
+
+  def depositos
+    render json: Local.where(tipo_local: Local::DEPOSITO).as_json
   end
 end

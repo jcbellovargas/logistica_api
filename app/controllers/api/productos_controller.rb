@@ -2,7 +2,7 @@ class Api::ProductosController < ApplicationController
   include Interactor
 
   def index
-    render json: Producto.all
+    render json: Producto.all.as_json
   end
 
   def create
